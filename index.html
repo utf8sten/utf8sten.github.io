@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>utf8sten</title>
+    <link rel="stylesheet" href="style.css">
+    <meta property="og:title" content="^w^"/>
+    <meta property="og:description" content="utf8sten in browser, how cool is that"/>
+    <meta property="og:url" content="https://utf8sten.github.io/index.html"/>
+    <!--<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkYeG8AiYd8RCJ7PthTseZDVm3xaaUMmNvIG1dUxiJnw&s=10"/>-->
+  </head>
+  <body>
+    <script src="utf8sten_JsO.js" type="module"></script>
+
+    <button onclick="encode()">encode</button>
+    <button onclick="decode()">decode</button><br/>
+    <textarea style='width: 50%' id="original" placeholder="original message"></textarea><br/>
+    <textarea style='width: 50%' id="encoded" placeholder="encoded"></textarea><br/><br/>
+    <p>encoding v2:</p>
+    <button onclick="encode2()">encode2</button>
+    <button onclick="decode2()">decode2</button><br/>
+    <textarea style='width: 50%' id="original2" placeholder="original message"></textarea><br/>
+    <textarea style='width: 50%' id="encoded2" placeholder="encoded v2"></textarea>
+
+  </body>
+</html>

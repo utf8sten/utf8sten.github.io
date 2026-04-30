@@ -1,0 +1,61 @@
+body {
+  font-family: sans-serif, monospace;
+  background-color: black;
+  color: white;
+}
+
+a {
+  color: #3366ee;
+}
+
+input {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 5px;
+  border-color: #404050;
+}
+
+textarea {
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 5px;
+  border-color: #404050;
+  resize: both;
+}
+
+button {
+  background-color: #2a2a2a;
+  color: white;
+  border-radius: 2px;
+  border-color: #505060;
+}
+
+button:active {
+  background-color: #0a0a0a;
+  color: white;
+  border-color: #303040;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar {
+  position: sticky;
+  width: 100%;
+  background-color: #2a2a2a;
+  padding: 5px;
+}
+
+.inline-cont>* {
+  display: inline-block;
+}
+
+.inline-bl {
+  display: inline-block;
+}
+
+.full-width {
+  width: 100%;
+}
