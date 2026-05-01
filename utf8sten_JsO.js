@@ -47,12 +47,12 @@ function decode(){
 }
 
 function decode2(){
-  let content=document.getElementById("encoded").value;
-  let dest=document.getElementById("original");
+  let content=document.getElementById("encoded2").value;
+  let dest=document.getElementById("original2");
   if (content==""){
     dest.value=content;
   } else {
-    dest.value=decoder.decode(deSten(UTF8_den(content)));
+    dest.value=decoder.decode(deSten2(UTF8_den(content)));
   }
 }
 
