@@ -10,17 +10,30 @@
     <!--<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkYeG8AiYd8RCJ7PthTseZDVm3xaaUMmNvIG1dUxiJnw&s=10"/>-->
   </head>
   <body>
+    <h3>utf8sten in web page</h3>
+    <p>utf8sten encoder/decoder for both v1 and v2 versions in browser</p>
+    <p>note: your browser needs to support Wasm</p><br/>
+
     <script src="utf8sten_JsO.js" type="module"></script>
 
     <button onclick="encode()">encode</button>
     <button onclick="decode()">decode</button><br/>
-    <textarea style='width: 50%' id="original" placeholder="original message"></textarea><br/>
-    <textarea style='width: 50%' id="encoded" placeholder="encoded"></textarea><br/><br/>
+    <textarea style='width: 50%; height: 4em;' id="original" placeholder="original message"></textarea><br/>
+    <textarea style='width: 50%; height: 4em;' id="encoded" placeholder="encoded"></textarea><br/><br/>
     <p>encoding v2:</p>
     <button onclick="encode2()">encode2</button>
     <button onclick="decode2()">decode2</button><br/>
-    <textarea style='width: 50%' id="original2" placeholder="original message"></textarea><br/>
-    <textarea style='width: 50%' id="encoded2" placeholder="encoded v2"></textarea>
+    <textarea style='width: 50%; height: 4em;' id="original2" placeholder="original message"></textarea><br/>
+    <textarea style='width: 50%; height: 4em;' id="encoded2" placeholder="encoded v2"></textarea>
 
+    <br/><br/><a href="about.html">about utf8sten</a>
+    <p>utf8sten repositories: </p>
+    <div style="padding-left: 10mm;">
+      <ul>
+        <li><a href="https://github.com/11mushroom/utf8sten">utf8sten</a>(C++)</li>
+        <li><a href="https://github.com/11mushroom/utf8sten_python">utf8sten_python</a></li>
+        <li><a href="https://github.com/11mushroom/utf8sten_python">utf8sten_oxidised</a>(Rust)</li>
+      </ul>
+    </div>
   </body>
 </html>

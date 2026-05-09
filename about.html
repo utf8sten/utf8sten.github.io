@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <title>about utf8sten</title>
+    <link rel="stylesheet" href="style.css">
+    <meta property="og:title" content="about utf8sten"/>
+    <meta property="og:description" content="about utf8sten"/>
+    <meta property="og:url" content="https://utf8sten.github.io/about.html"/>
+  </head>
+  <body>
+    <a href="index.html">main</a><br>
+    <div style="padding-right: 20mm;">
+      <br/><h2>A bit of history</h2>
+      <div style="padding-left: 10mm;">
+        <p>
+          if you used social media platforms and tried to type or paste some large amounts of text,
+          you probably know how frustrating it is when your text is only a few symbols over character limit.
+        </p>
+        <p>
+          it happened to me when i wrote a bio for my telegram,
+          but it was a little too long. and then i remembered about utf8 encoding and unicode.
+        </p>
+      </div>
+      <br/><h2>More technical part</h2>
+      <div style="padding-left: 10mm;">
+        <p>
+          ascii characters take just 1 byte(8 bits) but unicode have way more characters, like a LOT more than ascii, 
+          so one unicode codepoint can take more than 1 byte. BUT, in most of messangers 
+          unicode character also counts as 1, the same as 1 single byte ascii character. 
+          and then i thought - "why don't i just store mustiple ascii characters/bytes in one codepoint?", 
+          and it was it!
+        </p>
+        <p>
+          i found range of codepoints U+8000 - U+8fff where all codepoints are valid, 
+          so now in 1 unicode i can store 1.5 ascii character. 
+          awesome, now we can store 3 bytes in 2 unicode symbols, 
+          now formula for calculating output &plusmn;length is "y=(x*2)/3"
+        </p>
+        <p>
+          but we can go further, we can compress(eg. with gzip/zstd) our data/text and then send it, right? 
+          well, not directly, usually messangers sanitize your text so it doesn't contain non-text characters, 
+          but now we can store these raw bytes in unicode text! 
+          but why don't just use base64? we can but it will take more characters than your compressed bytes, 
+          while with utf8sten it takes <u>less</u> characters(but more bytes) than amount of <u>bytes</u> you encode.
+        </p>
+        <p>
+          utf8sten will not, and can not replace base64/32 because it will take more space in bytes, 
+          it was made specifically to make less unicode <u>characters/symbols</u> than input bytes. 
+          just use right tool.
+        </p>
+      </div>
+      <br/><h2>TL;DR</h2>
+      <div style="padding-left: 10mm;">
+        <ul>
+          <li>with utf8sten you can overcome content length limits on some social media platforms</li>
+          <li>formula for calculating amount of output symbols is &plusmn; "y=(x*2)/3" where x is amount of input bytes and y is &plusmn;amount of symbols with encoded data</li>
+          <li>if you want to keep it simple you can just encode your text</li>
+          <li>if you need or want to squash/compress as much as possible, you can use gzip/zstd or any other compression tools and then encode its output using utf8sten</li>
+          <li>you can encode whatever binary data you want</li>
+          <li>utf8sten is not a replacement for base64/32, just use right tool for your needs</li>
+        </ul>
+      </div>
+      <br/><br/>
+      <p><i>and now i can finally fit my text  in message and bio</i></p>
+    </div>
+  </body>
+</html>
