@@ -1,27 +1,11 @@
-/* @ts-self-types="./UTF8.d.ts" */
+/* @ts-self-types="./utf8sten_web.d.ts" */
 
 /**
- * function to deencode string that contains UTF-8 characters and returns Vector with codepoints of characters
- * @param {string} string
- * @returns {Uint32Array}
- */
-export function UTF8_den(string) {
-    const ptr0 = passStringToWasm0(string, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.UTF8_den(ptr0, len0);
-    var v2 = getArrayU32FromWasm0(ret[0], ret[1]).slice();
-    wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
-    return v2;
-}
-
-/**
- * function to decode data from codepoints
- * decodes result of enSten and enSten2 functions
- * @param {Uint32Array} arr
+ * @param {Uint32Array} src
  * @returns {Uint8Array}
  */
-export function deSten(arr) {
-    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+export function deSten(src) {
+    const ptr0 = passArray32ToWasm0(src, wasm.__wbindgen_malloc);
     const len0 = WASM_VECTOR_LEN;
     const ret = wasm.deSten(ptr0, len0);
     var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
@@ -30,14 +14,11 @@ export function deSten(arr) {
 }
 
 /**
- * function to decode data from codepoints, second version of encoding
- * it's more optimized specifically for decoding second version
- * only decodes result of enSten2 function
- * @param {Uint32Array} arr
+ * @param {Uint32Array} src
  * @returns {Uint8Array}
  */
-export function deSten2(arr) {
-    const ptr0 = passArray32ToWasm0(arr, wasm.__wbindgen_malloc);
+export function deSten2(src) {
+    const ptr0 = passArray32ToWasm0(src, wasm.__wbindgen_malloc);
     const len0 = WASM_VECTOR_LEN;
     const ret = wasm.deSten2(ptr0, len0);
     var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
@@ -46,18 +27,16 @@ export function deSten2(arr) {
 }
 
 /**
- * function to encode bytes in UTF-8 characters, recives array of bytes and length of that array, and returns vector with codepoints with data stored in it
- * uses new way to encode, which can be faster
- * @param {Uint8Array} arr
+ * @param {Uint8Array} src
  * @returns {string}
  */
-export function enSten(arr) {
+export function enSten2_string(src) {
     let deferred2_0;
     let deferred2_1;
     try {
-        const ptr0 = passArray8ToWasm0(arr, wasm.__wbindgen_malloc);
+        const ptr0 = passArray8ToWasm0(src, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.enSten(ptr0, len0);
+        const ret = wasm.enSten2_string(ptr0, len0);
         deferred2_0 = ret[0];
         deferred2_1 = ret[1];
         return getStringFromWasm0(ret[0], ret[1]);
@@ -67,20 +46,16 @@ export function enSten(arr) {
 }
 
 /**
- * function to encode bytes in UTF-8 characters, recives array of bytes and length of that array, and returns vector with codepoints with data stored in it
- * secont, more efficient encoding methode
- * works reliably with ascii table values (x<=0x7f)
- * * other byte values are just gamble
- * @param {Uint8Array} arr
+ * @param {Uint8Array} src
  * @returns {string}
  */
-export function enSten2(arr) {
+export function enSten_string(src) {
     let deferred2_0;
     let deferred2_1;
     try {
-        const ptr0 = passArray8ToWasm0(arr, wasm.__wbindgen_malloc);
+        const ptr0 = passArray8ToWasm0(src, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
-        const ret = wasm.enSten2(ptr0, len0);
+        const ret = wasm.enSten_string(ptr0, len0);
         deferred2_0 = ret[0];
         deferred2_1 = ret[1];
         return getStringFromWasm0(ret[0], ret[1]);
@@ -90,13 +65,35 @@ export function enSten2(arr) {
 }
 
 /**
- * @param {Uint8Array} arr
+ * @param {Uint32Array} src
  * @returns {boolean}
  */
-export function v2_encode_valid(arr) {
-    const ptr0 = passArray8ToWasm0(arr, wasm.__wbindgen_malloc);
+export function is_v1_encoded(src) {
+    const ptr0 = passArray32ToWasm0(src, wasm.__wbindgen_malloc);
     const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.v2_encode_valid(ptr0, len0);
+    const ret = wasm.is_v1_encoded(ptr0, len0);
+    return ret !== 0;
+}
+
+/**
+ * @param {Uint32Array} src
+ * @returns {boolean}
+ */
+export function is_v2_encoded(src) {
+    const ptr0 = passArray32ToWasm0(src, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.is_v2_encoded(ptr0, len0);
+    return ret !== 0;
+}
+
+/**
+ * @param {Uint8Array} src
+ * @returns {boolean}
+ */
+export function v2_compatible(src) {
+    const ptr0 = passArray8ToWasm0(src, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.v2_compatible(ptr0, len0);
     return ret !== 0;
 }
 function __wbg_get_imports() {
@@ -114,13 +111,8 @@ function __wbg_get_imports() {
     };
     return {
         __proto__: null,
-        "./UTF8_bg.js": import0,
+        "./utf8sten_web_bg.js": import0,
     };
-}
-
-function getArrayU32FromWasm0(ptr, len) {
-    ptr = ptr >>> 0;
-    return getUint32ArrayMemory0().subarray(ptr / 4, ptr / 4 + len);
 }
 
 function getArrayU8FromWasm0(ptr, len) {
@@ -129,8 +121,7 @@ function getArrayU8FromWasm0(ptr, len) {
 }
 
 function getStringFromWasm0(ptr, len) {
-    ptr = ptr >>> 0;
-    return decodeText(ptr, len);
+    return decodeText(ptr >>> 0, len);
 }
 
 let cachedUint32ArrayMemory0 = null;
@@ -163,43 +154,6 @@ function passArray8ToWasm0(arg, malloc) {
     return ptr;
 }
 
-function passStringToWasm0(arg, malloc, realloc) {
-    if (realloc === undefined) {
-        const buf = cachedTextEncoder.encode(arg);
-        const ptr = malloc(buf.length, 1) >>> 0;
-        getUint8ArrayMemory0().subarray(ptr, ptr + buf.length).set(buf);
-        WASM_VECTOR_LEN = buf.length;
-        return ptr;
-    }
-
-    let len = arg.length;
-    let ptr = malloc(len, 1) >>> 0;
-
-    const mem = getUint8ArrayMemory0();
-
-    let offset = 0;
-
-    for (; offset < len; offset++) {
-        const code = arg.charCodeAt(offset);
-        if (code > 0x7F) break;
-        mem[ptr + offset] = code;
-    }
-    if (offset !== len) {
-        if (offset !== 0) {
-            arg = arg.slice(offset);
-        }
-        ptr = realloc(ptr, len, len = offset + arg.length * 3, 1) >>> 0;
-        const view = getUint8ArrayMemory0().subarray(ptr + offset, ptr + len);
-        const ret = cachedTextEncoder.encodeInto(arg, view);
-
-        offset += ret.written;
-        ptr = realloc(ptr, len, offset, 1) >>> 0;
-    }
-
-    WASM_VECTOR_LEN = offset;
-    return ptr;
-}
-
 let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
 cachedTextDecoder.decode();
 const MAX_SAFARI_DECODE_BYTES = 2146435072;
@@ -214,23 +168,11 @@ function decodeText(ptr, len) {
     return cachedTextDecoder.decode(getUint8ArrayMemory0().subarray(ptr, ptr + len));
 }
 
-const cachedTextEncoder = new TextEncoder();
-
-if (!('encodeInto' in cachedTextEncoder)) {
-    cachedTextEncoder.encodeInto = function (arg, view) {
-        const buf = cachedTextEncoder.encode(arg);
-        view.set(buf);
-        return {
-            read: arg.length,
-            written: buf.length
-        };
-    };
-}
-
 let WASM_VECTOR_LEN = 0;
 
-let wasmModule, wasm;
+let wasmModule, wasmInstance, wasm;
 function __wbg_finalize_init(instance, module) {
+    wasmInstance = instance;
     wasm = instance.exports;
     wasmModule = module;
     cachedUint32ArrayMemory0 = null;
@@ -241,11 +183,15 @@ function __wbg_finalize_init(instance, module) {
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
+        if (!module.ok) {
+            throw new Error(`failed to fetch Wasm: ${module.status} ${module.statusText} fetching '${module.url}'`);
+        }
+
         if (typeof WebAssembly.instantiateStreaming === 'function') {
             try {
                 return await WebAssembly.instantiateStreaming(module, imports);
             } catch (e) {
-                const validResponse = module.ok && expectedResponseType(module.type);
+                const validResponse = expectedResponseType(module.type);
 
                 if (validResponse && module.headers.get('Content-Type') !== 'application/wasm') {
                     console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve Wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
@@ -307,7 +253,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (module_or_path === undefined) {
-        module_or_path = new URL('UTF8_bg.wasm', import.meta.url);
+        module_or_path = new URL('utf8sten_web_bg.wasm', import.meta.url);
     }
     const imports = __wbg_get_imports();
 
